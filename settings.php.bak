@@ -1,0 +1,274 @@
+<?php session_start();?>
+<html>
+<head></head>
+<body>
+<?php echo $_SESSION['loggedinuser']; ?>
+<div class="content">
+<h1>Your accounts</h1>
+
+<h2>Microblogging</h2>
+
+<p id="friendfeedNoUserParagraph" style="clear:both">
+<img src="/img/friendfeed.png" alt="friendfeed" /> Please insert your <a href="http://friendfeed.com/">friendfeed</a> credentials.
+
+</p>
+
+
+<form  class="signup" id="friendfeedCredentialsForm" name="friendfeedCredentialsForm" method="post">
+<fieldset>
+<label for="friendfeedUser">Nickname</label>
+<input type="text" name="friendfeedUser" value="" />
+<label for="friendfeedPass"><a href="http://friendfeed.com/remotekey" target="_blank" title="find your key">Remote key</a></label>
+<input type="text" name="friendfeedPass" />
+<input type="submit" value="verify" onclick="validateUserPass(friendfeedCredentialsForm.friendfeedUser.value,friendfeedCredentialsForm.friendfeedPass.value,'/accounts/friendfeed/verify/json', 'friendfeedSpinningWheel', 'friendfeedCredentialsError', 'friendfeedCredentialsForm'); return false;"/><img id="friendfeedSpinningWheel" class="spinningWheel" style="display:none" src="/img/loading.gif" />
+</fieldset>
+</form>
+<div style="display:none" id="friendfeedCredentialsError" class="errorMsg">Invalid nickname or remote key.</div>
+<p id="identicaNoUserParagraph" style="clear:both">
+
+<img src="/img/identica.png" alt="identica" />
+Please insert your <a href="http://identi.ca/">identi.ca</a> credentials.
+</p>
+
+
+<form  class="signup" id="identicaCredentialsForm" name="identicaCredentialsForm" method="post">
+<fieldset>
+<label for="identicaUser">Username</label>
+<input type="text" name="identicaUser" value="" />
+<label for="identicaPass">Password</label>
+<input type="password" name="identicaPass" />
+<input type="submit" value="verify" onclick="validateUserPass(identicaCredentialsForm.identicaUser.value,identicaCredentialsForm.identicaPass.value,'/accounts/identica/verify/json','identicaSpinningWheel','identicaCredentialsError', 'identicaCredentialsForm'); return false;"/><img id="identicaSpinningWheel" class="spinningWheel" style="display:none" src="/img/loading.gif" />
+
+</fieldset>
+</form>
+<div style="display:none" id="identicaCredentialsError" class="errorMsg">Invalid username or password.</div>
+<p class="notice">
+    Jaiku changed their API and our integration is currently not working.
+    We're fixing this situation and will post more information <a target="_blank" href="http://getsatisfaction.com/tarpipe/topics/how_do_i_set_up_a_jaiku_account">here</a>.
+</p>
+
+<p id="jaikuNoUserParagraph" style="clear:both">
+<img src="/img/jaiku.png" alt="jaiku" /> Please insert your <a href="http://jaiku.com/">Jaiku</a> credentials.
+
+</p>
+
+
+<form  class="signup" id="jaikuCredentialsForm" name="jaikuCredentialsForm" method="post">
+<fieldset>
+<label for="jaikuuser">Username</label>
+<input type="text" name="jaikuUser" value="" />
+<label for="jaikuKey">Personal key</label>
+<input type="text" name="jaikuKey" />
+<input type="submit" value="verify" onclick="validateUserPass(jaikuCredentialsForm.jaikuUser.value,jaikuCredentialsForm.jaikuKey.value,'/accounts/jaiku/verify/json','jaikuSpinningWheel','jaikuCredentialsError', 'jaikuCredentialsForm'); return false;"/><img id="jaikuSpinningWheel" class="spinningWheel" style="display:none" src="/img/loading.gif" />
+</fieldset>
+</form>
+<div style="display:none" id="jaikuCredentialsError" class="errorMsg">Invalid username or personal key.</div>
+<p id="plurkNoUserParagraph" style="clear:both">
+
+<img src="/img/plurk.png" alt="plurk" /> Please insert your <a href="http://plurk.com/">plurk</a> credentials.
+</p>
+
+
+<form  class="signup" id="plurkCredentialsForm" name="plurkCredentialsForm" method="post">
+<fieldset>
+<label for="plurkUser">Username</label>
+<input type="text" name="plurkUser" value="" />
+<label for="plurkPass">Password</label>
+<input type="password" name="plurkPass" />
+<input type="submit" value="verify" onclick="validateUserPass(plurkCredentialsForm.plurkUser.value,plurkCredentialsForm.plurkPass.value,'/accounts/plurk/verify/json', 'plurkSpinningWheel', 'plurkCredentialsError', 'plurkCredentialsForm'); return false;"/><img id="plurkSpinningWheel" class="spinningWheel" style="display:none" src="/img/loading.gif" />
+
+</fieldset>
+</form>
+<div style="display:none" id="plurkCredentialsError" class="errorMsg">Invalid username or password.</div>
+<p id="rejawNoUserParagraph" style="clear:both">
+<img src="/img/rejaw.png" alt="rejaw" />
+Please insert your <a href="http://rejaw.com/">rejaw</a> credentials.
+</p>
+
+
+<form  class="signup" id="rejawCredentialsForm" name="rejawCredentialsForm" method="post">
+<fieldset>
+<label for="rejawuser">Username</label>
+
+<input type="text" name="rejawUser" value="" />
+<label for="rejawPass"><a href="http://rejaw.com/account/credentials" target="_blank" title="find your secondary password">Secondary<br/>password</a></label>
+<input type="password" name="rejawPass" />
+<input type="submit" value="verify" onclick="validateUserPass(rejawCredentialsForm.rejawUser.value,rejawCredentialsForm.rejawPass.value,'/accounts/rejaw/verify/json','rejawSpinningWheel','rejawCredentialsError', 'rejawCredentialsForm'); return false;"/><img id="rejawSpinningWheel" class="spinningWheel" style="display:none" src="/img/loading.gif" />
+</fieldset>
+</form>
+<div style="display:none" id="rejawCredentialsError" class="errorMsg">Invalid username or password.</div>
+<p id="twitterNoUserParagraph" style="clear:both">
+<img src="/img/twitter.png" alt="twitter" />
+Please insert your <a href="http://twitter.com/">twitter</a> credentials.
+</p>
+
+
+<form  class="signup" id="twitterCredentialsForm" name="twitterCredentialsForm" method="post">
+<fieldset>
+<label for="twitteruser">Username</label>
+<input type="text" name="twitterUser" value="" />
+<label for="twitterPass">Password</label>
+<input type="password" name="twitterPass" />
+<input type="submit" value="verify" onclick="validateUserPass(twitterCredentialsForm.twitterUser.value,twitterCredentialsForm.twitterPass.value,'/accounts/twitter/verify/json','twitterSpinningWheel','twitterCredentialsError', 'twitterCredentialsForm'); return false;"/><img id="twitterSpinningWheel" class="spinningWheel" style="display:none" src="/img/loading.gif" />
+</fieldset>
+</form>
+<div style="display:none" id="twitterCredentialsError" class="errorMsg">Invalid username or password.</div>
+<h2>Picture sharing</h2>
+
+<p id="23hqNoUserParagraph" style="clear:both">
+<img src="/img/23hq.png" alt="23hq" /> Please give us permission to upload pictures to your <a href="http://23hq.com/">23hq</a> account.
+</p>
+
+
+<form  class="signup" id="23hqCredentialsForm" name="23hqCredentialsForm" action="#">
+<fieldset>
+<input type="submit" value="authorize" onclick="var w=openWindow('http://www.23hq.com/services/auth/?api_key=43a621f31b857d8b7ba6579631494153&frob=4274FE43C7A2CAEA8A8BC21F');validate23hq('4274FE43C7A2CAEA8A8BC21F', w);return false;" />
+</fieldset>
+</form>
+<p id="flickrNoUserParagraph" style="clear:both">
+<img src="/img/flickr.png" alt="flickr" /> Please give us permission to upload pictures to your <a href="http://flickr.com/">flickr</a> account.
+
+</p>
+
+
+<form  class="signup" id="flickrCredentialsForm" name="flickrCredentialsForm" method="get" action="/accounts/flickr/">
+<fieldset>
+<input type="submit" value="authorize" />
+</fieldset>
+</form>
+<p id="photobucketNoUserParagraph" style="clear:both">
+<img src="/img/photobucket.png" alt="photobucket" /> Please insert your <a href="http://photobucket.com/">photobucket</a> credentials.
+</p>
+
+
+<form  class="signup" id="photobucketCredentialsForm" name="photobucketCredentialsForm" method="post">
+<fieldset>
+<label for="photobucketUser">Username</label>
+<input type="text" name="photobucketUser" value="" />
+<label for="photobucketPass">Password</label>
+<input type="password" name="photobucketPass" />
+<input type="submit" value="verify" onclick="validateUserPass(photobucketCredentialsForm.photobucketUser.value,photobucketCredentialsForm.photobucketPass.value,'/accounts/photobucket/verify/json', 'photobucketSpinningWheel', 'photobucketCredentialsError', 'photobucketCredentialsForm'); return false;"/><img id="photobucketSpinningWheel" class="spinningWheel" style="display:none" src="/img/loading.gif" />
+</fieldset>
+</form>
+<div style="display:none" id="photobucketCredentialsError" class="errorMsg">Invalid username or password.</div>
+<p id="pikeoNoUserParagraph" style="clear:both">
+<img src="/img/pikeo.png" alt="pikeo" />
+Please insert your <a href="http://pikeo.com/">pikeo</a> credentials.
+
+</p>
+
+
+<form  class="signup" id="pikeoCredentialsForm" name="pikeoCredentialsForm" method="post">
+<fieldset>
+<label for="pikeouser">Username</label>
+<input type="text" name="pikeoUser" value="" />
+<label for="pikeoPass">Password</label>
+<input type="password" name="pikeoPass" />
+<input type="submit" value="verify" onclick="validateUserPass(pikeoCredentialsForm.pikeoUser.value,pikeoCredentialsForm.pikeoPass.value,'/accounts/pikeo/verify/json','pikeoSpinningWheel','pikeoCredentialsError', 'pikeoCredentialsForm'); return false;"/><img id="pikeoSpinningWheel" class="spinningWheel" style="display:none" src="/img/loading.gif" />
+</fieldset>
+</form>
+<div style="display:none" id="pikeoCredentialsError" class="errorMsg">Invalid username or password.</div>
+<p id="twitpicNoUserParagraph" style="clear:both">
+
+<img src="/img/twitpic.png" alt="twitpic" />
+<a href="http://twitpic.com/">TwitPic</a> uses your twitter credentials.
+</p>
+<br />
+<h2>Social networks</h2>
+
+<p id="facebookNoUserParagraph" style="clear:both">
+<img src="/img/facebook.png" alt="facebook" /> Please give us permission to publish to your <a href="http://facebook.com/">Facebook</a> account.
+</p>
+
+<form  class="signup" id="facebookCredentialsForm" name="facebookCredentialsForm" action="#">
+<fieldset>
+<input type="submit" value="authorize" onclick="var w=openWindow('/accounts/facebook/');validateFacebook(w);return false;" />
+</fieldset>
+</form>
+<p id="plaxoNoUserParagraph" style="clear:both">
+<img src="/img/plaxo.png" alt="plaxo" />
+Please insert your <a href="http://plaxo.com/">Plaxo</a> credentials.
+</p>
+
+
+<form  class="signup" id="plaxoCredentialsForm" name="plaxoCredentialsForm" method="post">
+<fieldset>
+
+<label for="plaxoUser">Email</label>
+<input type="text" name="plaxoUser" value="" />
+<label for="plaxoPass">Password</label>
+<input type="password" name="plaxoPass" />
+<input type="submit" value="verify" onclick="validateUserPass(plaxoCredentialsForm.plaxoUser.value,plaxoCredentialsForm.plaxoPass.value,'/accounts/plaxo/verify/json','plaxoSpinningWheel','plaxoCredentialsError', 'plaxoCredentialsForm'); return false;"/><img id="plaxoSpinningWheel" class="spinningWheel" style="display:none" src="/img/loading.gif" />
+</fieldset>
+</form>
+<div style="display:none" id="plaxoCredentialsError" class="errorMsg">Invalid username or password.</div>
+<h2>Blogging</h2>
+
+<p id="tumblrNoUserParagraph" style="clear:both">
+<img src="/img/tumblr.png" alt="tumblr" /> Please insert your <a href="http://tumblr.com/">Tumblr</a> credentials.
+
+</p>
+
+
+<form  class="signup" id="tumblrCredentialsForm" name="tumblrCredentialsForm" method="post">
+<fieldset>
+<label for="tumblruser">Email</label>
+<input type="text" name="tumblrUser" value="" />
+<label for="tumblrPass">Password</label>
+<input type="password" name="tumblrPass" />
+<input type="submit" value="verify" onclick="validateUserPass(tumblrCredentialsForm.tumblrUser.value,tumblrCredentialsForm.tumblrPass.value,'/accounts/tumblr/verify/json','tumblrSpinningWheel','tumblrCredentialsError', 'tumblrCredentialsForm'); return false;"/><img id="tumblrSpinningWheel" class="spinningWheel" style="display:none" src="/img/loading.gif" />
+</fieldset>
+</form>
+<div style="display:none" id="tumblrCredentialsError" class="errorMsg">Invalid email or password.</div>
+<h2>Bookmarking</h2>
+
+<p id="deliciousNoUserParagraph" style="clear:both">
+<img src="/img/delicious.png" alt="del.icio.us" /> Please insert your <a href="http://del.icio.us/">del.icio.us</a> credentials.
+</p>
+
+
+<form  class="signup" id="deliciousCredentialsForm" name="deliciousCredentialsForm" method="post">
+<fieldset>
+<label for="delicioususer">Username</label>
+<input type="text" name="deliciousUser" value="" />
+<label for="deliciousPass">Password</label>
+
+<input type="password" name="deliciousPass" />
+<input type="submit" value="verify" onclick="validateUserPass(deliciousCredentialsForm.deliciousUser.value,deliciousCredentialsForm.deliciousPass.value,'/accounts/delicious/verify/json','deliciousSpinningWheel','deliciousCredentialsError', 'deliciousCredentialsForm'); return false;"/><img id="deliciousSpinningWheel" class="spinningWheel" style="display:none" src="/img/loading.gif" />
+</fieldset>
+</form>
+<div style="display:none" id="deliciousCredentialsError" class="errorMsg">Invalid username or password.</div>
+<p id="sapoLinksNoUserParagraph" style="clear:both">
+<img src="/img/sapolinks.png" alt="SAPO Links" /> Please insert your <a href="http://links.sapo.pt/">SAPO Links</a> credentials.
+</p>
+
+
+<form  class="signup" id="sapoLinksCredentialsForm" name="sapoLinksCredentialsForm" method="post">
+<fieldset>
+
+<label for="sapoLinksuser">Username</label>
+<input type="text" name="sapoLinksUser" value="" />
+<label for="sapoLinksPass">Password</label>
+<input type="password" name="sapoLinksPass" />
+<input type="submit" value="verify" onclick="validateUserPass(sapoLinksCredentialsForm.sapoLinksUser.value,sapoLinksCredentialsForm.sapoLinksPass.value,'/accounts/sapolinks/verify/json','sapoLinksSpinningWheel','sapoLinksCredentialsError', 'sapoLinksCredentialsForm'); return false;"/><img id="sapoLinksSpinningWheel" class="spinningWheel" style="display:none" src="/img/loading.gif" />
+</fieldset>
+</form>
+<div style="display:none" id="sapoLinksCredentialsError" class="errorMsg">Invalid username or password.</div>
+<h2>Productivity</h2>
+
+<p id="evernoteNoUserParagraph" style="clear:both">
+<img src="/img/evernote.png" alt="flickr" /> Please give us permission to publish notes to your <a href="http://www.evernote.com/">Evernote</a> account.
+
+</p>
+
+
+<form   class="signup" id="evernoteCredentialsForm" name="evernoteCredentialsForm" method="get" action="/accounts/evernote/">
+<fieldset>
+<input type="submit" value="authorize" />
+</fieldset>
+</form>
+</div>
+
+</body>
+
+</html>

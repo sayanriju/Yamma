@@ -1,0 +1,149 @@
+<?php
+/*
+ *      class.Twitter.php
+ *      
+ *      Copyright 2010 Sayan Chakrabarti <me@sayanriju.co.cc>
+ *      
+ *      This program is free software; you can redistribute it and/or modify
+ *      it under the terms of the GNU General Public License as published by
+ *      the Free Software Foundation; either version 2 of the License, or
+ *      (at your option) any later version.
+ *      
+ *      This program is distributed in the hope that it will be useful,
+ *      but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *      GNU General Public License for more details.
+ *      
+ *      You should have received a copy of the GNU General Public License
+ *      along with this program; if not, write to the Free Software
+ *      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ *      MA 02110-1301, USA.
+ */
+?>
+
+<?php
+include("helpers/twitteroauth/twitteroauth.php");	
+include("configurations/conf.Twitter.php");
+//include("../../views/class.SingleItem.php");
+
+/*
+include("helpers/twitter.lib.php");
+class TwitterPlugin extends Twitter{
+	public $plugin_name="twitter";
+	public $disabled=0;
+	public $features=array('personal'=>1,'network'=>1,'update'=>1);
+	
+	function __construct(){
+		//parent::__construct($GLOBALS['login'],$GLOBALS['pass']);
+		$login=func_get_arg(0);
+		$pass=func_get_arg(1);
+		parent::__construct($login,$pass);
+	}
+	
+	private function parseXML($xml){
+		$itemlist=array();
+		$statuslist= new SimpleXMLElement($xml);
+		foreach($statuslist->status as $status){
+			$item=new SingleItem();
+			$item->service_name='twitter';
+			$item->title=$status->user->name;	
+			//$item->image=$status->user->profile_image_url; // TESTING LOCALLY
+			$item->source_url="http://twitter.com/".$status->user->screen_name;
+			//$item->service_image="http://twitter.com/favicon.ico"; // TESTING LOCALLY
+			$item->content=$status->text;
+			$item->datetime=$status->created_at;
+			$itemlist[]=$item;
+			unset($item);
+		}	
+		return $itemlist;
+	}	
+	
+	public function getNetworkStatus(){
+		$xml=$this->getFriendsTimeline();
+		//testing locally!
+		//$xml=file_get_contents('/tmp/tw.xml');
+		//////
+		return $this->parseXML($xml);
+	}
+	
+	public function getPersonalStatus(){
+		//$xml=$this->getUserTimeline();
+				//testing locally!
+		$xml=file_get_contents('/home/sayan/tw.xml');
+		//////
+		return $this->parseXML($xml);
+	}
+	
+	public function setStatus($txt){
+		$txt=substr($txt,0,140);	// truncate
+		$this->updateStatus("$txt");
+	}
+}
+/*
+$obj=new TwitterPlugin();
+$itemlist=$obj->getNetworkStatus();
+foreach($itemlist as $item)
+	echo $item->generateHTML();
+
+*/
+
+class TwitterPlugin extends TwitterOAuth{
+	public $plugin_name="twitter";
+	public $disabled=0;
+	public $features=array('personal'=>1,'network'=>1,'update'=>1);
+	public $favicon;
+	
+	
+	function __construct()	{
+		$consumer_key=urlencode($_GLOBALS['consumer_key']);	//from conf.Twitter.php
+		$consumer_secret=urlencode($_GLOBALS['consumer_secret']);// -do-
+		$oauth_access_token=urlencode(func_get_arg(0));
+		$oauth_access_token_secret=urlencode(func_get_arg(1));
+		parent::__construct($consumer_key,$consumer_secret,$oauth_access_token,$oauth_access_token_secret);
+		if(func_num_args==3)
+			$this->favicon=func_get_arg(2);
+	}
+	
+	private function parseXML($xml){
+		$itemlist=array();
+		$statuslist= new SimpleXMLElement($xml);
+		foreach($statuslist->status as $status){
+			//include_once("../classes/class.SingleItem.php");
+			$item=new SingleItem();
+			$item->service_name='twitter';
+			$item->title=$status->user->name;	
+			$item->image=$status->user->profile_image_url; 
+			$item->source_url="http://twitter.com/".$status->user->screen_name;
+			$item->service_image=$this->favicon;//"http://twitter.com/favicon.ico"; // TESTING LOCALLY
+			$item->content=$status->text;
+			$item->datetime=$status->created_at;
+			$itemlist[]=$item;
+			unset($item);
+		}	
+		return $itemlist;
+	}	
+	
+	function getPersonalStatus(){
+		$xmlstr=$this->OAuthRequest("http://api.twitter.com/1/statuses/user_timeline.xml",'GET',array());
+		return $this->parseXML($xmlstr);
+	}
+	
+	function getNetworkStatus(){
+		//$this->get('account/verify_credentials');
+		$xmlstr=$this->OAuthRequest("http://api.twitter.com/1/statuses/home_timeline.xml",'GET',array());
+		echo $xmlstr;
+		//return $this->parseXML($xmlstr);
+	}
+	
+	function setStatus($txt){
+		$this->OAuthRequest("http://api.twitter.com/1/statuses/update.xml",array('status' => $txt), 'POST')	;
+	}
+}
+/*
+$obj=new TwitterPlugin(urlencode('14475497-XVPcDfAWLEhFTGtETO2h0LBbf6zARqkd3JhlAOZue'),urlencode('vE52jnsJNCO61ChqZ80ZOMzd7jHfvNe7nT4mkABVg4'));
+//$obj->setStatus('hello');
+$itemlist=$obj->getNetworkStatus();
+//foreach($itemlist as $item)
+	//echo $item->generateHTML();
+*/
+

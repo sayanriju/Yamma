@@ -1,0 +1,107 @@
+body{
+background:black;
+}
+img{
+border:none;
+outline:none;
+}
+#box{
+background:#9F6600;
+width:820px;;
+margin: 1em auto;
+padding:1.5em;
+/*text-align:center;*/
+-moz-border-radius: 1em;
+-webkit-border-radius:1em;
+}
+#loginbox{		/* for index.php only */
+background:#FFD891;
+margin:3em auto;
+padding:1em;
+text-align:center;
+}
+#infobox{
+margin:0em;
+margin-right:3em;
+float:right;
+background:#FF8F17;
+font-weight:bold;
+color:black;
+padding:0.5em;
+
+}
+#logo{
+margin-left:-1em;
+}
+.infobox_button{
+cursor:pointer;
+margin-top:0.5em;
+margin-left:1em;
+}
+#updatebox{
+background:#FF8F17;
+font-weight:bold;
+width:100%;
+color:black;	
+padding-top:1em;
+}
+#textarea_update{
+width:522px;
+height:55px;
+outline:none;
+border:none;
+}
+#button_update{
+    background-position: bottom right;
+    color: #000;
+	border:none;
+    outline: none; /* hide dotted outline in Firefox */
+	margin:1em;
+	height:32px;
+}
+.toggle_services_box{
+margin:1em;
+cursor:pointer;
+}
+#select_posting_services{
+margin-left:1em;
+cursor:pointer;
+}
+#charcount{
+font-size:80%;
+margin-left:370px;
+}
+#status_bar{
+float:right;
+margin-right:5em;
+}
+.status_link{
+margin:0 0.5em;
+background:#FF8F17;
+padding:0.2em 1em;
+font-size:90%;
+cursor:pointer;
+}
+.status_link:hover{
+text-decoration:underline;
+/*font-size:103%;*/
+}
+#feedsbox{
+margin:0 auto;
+padding-top:1em;
+width:100%;
+background:#FFD891;
+min-height:100px;
+}
+#textarea_update{
+margin:1em;
+}
+
+.single_item{
+margin:1em;
+padding:1em;
+background:#FFF9EC;
+}
+.single_item_title{
+color:black;
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<plugins_enabled>
+	<plugin>
+		<name>rss</name>
+		<feedurl>/home/sayan/rss.xml</feedurl>	
+	</plugin>
+	<plugin>
+		<name>twitter</name>
+		<oauth_access_token>14475497-XVPcDfAWLEhFTGtETO2h0LBbf6zARqkd3JhlAOZue</oauth_access_token>
+		<oauth_access_token_secret>vE52jnsJNCO61ChqZ80ZOMzd7jHfvNe7nT4mkABVg4</oauth_access_token_secret>
+	</plugin>
+	<!--	// TESTING LOCALLY
+	<plugin>
+		<name>identica</name>
+		<username>sayanriju</username>
+		<password>khulja</password>
+	</plugin>	
+-->
+</plugins_enabled>
